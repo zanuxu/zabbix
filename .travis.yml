@@ -1,0 +1,13 @@
+services:
+  - docker 
+
+before_install:
+
+  - docker build -t dimasabyuk/zabbix-1 . #собираем докер из докер файла
+  - docker run --name zabbix -p 127.0.0.1:80:4567 dimasabyuk/zabbix-1 
+  - docker start zabbix
+  - docker stop zabbix
+  - docker commit zabbix dimasabyuk/zabbix-1 
+# - docker login -u $DOCKER_USER -p $DOCKER_PASS -e $DOCKER_EMAIL
+  - docker push dimasabyuk/zabbix-1
+  echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin

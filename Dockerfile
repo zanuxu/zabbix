@@ -41,3 +41,15 @@ RUN set -eux && \
 
 #!/bin/bash
 EXPOSE 80/TCP 443/TCP 10051/TCP
+
+WORKDIR /usr/share/zabbix
+
+VOLUME ["/etc/ssl/apache2"]
+
+COPY ["apache.conf", "/etc/zabbix/"]
+COPY ["apache_ssl.conf", "/etc/zabbix/"]
+COPY ["zabbix.conf.php", "/etc/zabbix/web/"]
+COPY ["99-zabbix.ini", "/etc/php/7.2/apache2/conf.d/"]
+COPY ["docker-entrypoint.sh", "/usr/bin/"]
+
+ENTRYPOINT ["docker-entrypoint.sh"]

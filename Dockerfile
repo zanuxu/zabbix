@@ -35,6 +35,8 @@ RUN apt-get update && apt-get install -y \
         apt-get -y --no-install-recommends autoremove && \
         apt-get -y --no-install-recommends clean && \
         rm -rf /var/lib/apt/lists/*
+        
+RUN set -eux && \
         mkdir /usr/share/zabbix/ && \
         cp -R /usr/share/zabbix-4.2.4/frontends/php/* /usr/share/zabbix/ && \
         rm -rf /usr/share/zabbix-4.2.4/ && \

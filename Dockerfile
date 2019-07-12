@@ -19,7 +19,10 @@ RUN     set -e; \
         php7.2-mysql \
         php7.2-xml \
         ca-certificates
-        
+
+RUN     mkdir /usr/share/zabbix/ && \
+        cp -R /usr/share/zabbix-4.*.*/frontends/php/* /usr/share/zabbix
+
 WORKDIR /usr/share/zabbix
 
 VOLUME ["/etc/ssl/apache2"]

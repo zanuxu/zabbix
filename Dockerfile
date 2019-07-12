@@ -20,13 +20,20 @@ RUN     set -e; \
         php7.2-xml \
         ca-certificates
 
-RUN     apt-get -y install git \
+RUN     set -eux && \
+        apt-get -y install \
+        gettext \
+        ca-certificates \
+        git && \
         cd /usr/share/ && \
-        git clone https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/frontends/php && \
+        git clone https://git.zabbix.com/scm/zbx/zabbix.git --branch 4.2.4 --depth 1 --single-branch zabbix-4.2.4 && \
         mkdir /usr/share/zabbix/ && \
         cp -R /usr/share/zabbix-4.2.4/frontends/php/* /usr/share/zabbix && \
         rm -rf tests && \
-        apt-get -y purge git
+        apt-get -y purge \
+        git \
+        gettext
+
 
 WORKDIR /usr/share/zabbix
 

@@ -4,7 +4,7 @@ services:
 before_install:
 
   - docker build -t dimasabyuk/zabbix-1 . #собираем докер из докер файла
-  - docker run --name zabbix -p 127.0.0.1:80:4567 dimasabyuk/zabbix-1 
+  - docker run --name zabbix -p 127.0.0.1:80:80 dimasabyuk/zabbix-1 
   - docker start zabbix
   - docker stop zabbix
   - docker commit zabbix dimasabyuk/zabbix-1 
